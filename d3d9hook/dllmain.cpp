@@ -16,190 +16,18 @@ IDirect3DPixelShader9* pShader;
 //#define _CSGO
 
 #ifdef _CSS
-#define TE ( Stride == 32 && ( PHOENIX || ELITE || ARCTIC || GUERILLA ) )
-#define CTE ( Stride == 32 && ( GIGN || GIGN_MASK || SAS || GSG9 || SEAL ) )
-#define C4 ( ( Stride == 32 || Stride == 64 ) && numVertices == 758 && primCount == 462 )
+#define TR ((Stride == 32) && (PHOENIX || ELITE || ARCTIC || GUERILLA))
+#define CT ((Stride == 32) && (SEAL || GSG || SAS || GIGN))
 
-#define GIGN_MASK (( numVertices == 41 && primCount == 50 ) || \
-( numVertices == 20 && primCount == 18 ) || \
-( numVertices == 16 && primCount == 14 ) || \
-( numVertices == 11 && primCount == 9 ) || \
-( numVertices == 10 && primCount == 8 ))
+#define PHOENIX ((numVertices == 3265) && (primCount == 5015))
+#define ELITE ((numVertices == 3087) && (primCount == 4911))
+#define ARCTIC ((numVertices == 3210) && (primCount == 4503))
+#define GUERILLA ((numVertices == 3561) && (primCount == 5066))
 
-#define GIGN ((numVertices == 324 && primCount == 372) || \
-(numVertices == 466 && primCount == 550) || \
-(numVertices == 811 && primCount == 989) || \
-(numVertices == 1404 && primCount == 1919) || \
-(numVertices == 3304 && primCount == 5003) || \
-(numVertices == 2196 && primCount == 3061))
-
-#define GIGN_DX8_MASK (( numVertices == 20 && primCount == 18 ) || \
-( numVertices == 16 && primCount == 14 ) || \
-( numVertices == 11 && primCount == 9 ) || \
-( numVertices == 10 && primCount == 8 ) || \
-( numVertices == 41 && primCount == 50 ))
-
-#define GIGN_DX8 (( numVertices == 3473 && primCount == 3147 ) || \
-( numVertices == 3473 && primCount == 923 ) || \
-( numVertices == 3473 && primCount == 408 ) || \
-( numVertices == 3473 && primCount == 475 ) || \
-( numVertices == 3473 && primCount == 50 ) || \
-( numVertices == 2331 && primCount == 1676 ) || \
-( numVertices == 2331 && primCount == 940 ) || \
-( numVertices == 2331 && primCount == 439 ) || \
-( numVertices == 2331 && primCount == 6 ) || \
-( numVertices == 1493 && primCount == 1265 ) || \
-( numVertices == 1493 && primCount == 485 ) || \
-( numVertices == 1493 && primCount == 169 ) || \
-( numVertices == 811 && primCount == 989 ) || \
-( numVertices == 466 && primCount == 550 ) || \
-( numVertices == 324 && primCount == 372 ))
-
-#define SAS ((numVertices == 2245 && primCount == 2998) || \
-(numVertices == 3417 && primCount == 5030) || \
-(numVertices == 1498 && primCount == 1822) || \
-(numVertices == 929 && primCount == 1007) || \
-(numVertices == 499 && primCount == 533) || \
-(numVertices == 409 && primCount == 433))
-
-#define SAS_DX8 (( numVertices == 2337 && primCount == 1774 ) || \
-( numVertices == 2337 && primCount == 846 ) || \
-( numVertices == 2337 && primCount == 378 ) || \
-( numVertices == 3573 && primCount == 703 ) || \
-( numVertices == 3573 && primCount == 891 ) || \
-( numVertices == 3573 && primCount == 2754 ) || \
-( numVertices == 3573 && primCount == 682 ) || \
-( numVertices == 1562 && primCount == 1411 ) || \
-( numVertices == 1562 && primCount == 359 ) || \
-( numVertices == 1562 && primCount == 52 ) || \
-( numVertices == 929 && primCount == 1007 ) || \
-( numVertices == 499 && primCount == 533 ) || \
-( numVertices == 409 && primCount == 433 ))
-
-#define GSG9 ((numVertices == 1424 && primCount == 1858) || \
-(numVertices == 2130 && primCount == 3004) || \
-(numVertices == 814 && primCount == 945) || \
-(numVertices == 3206 && primCount == 4872) || \
-(numVertices == 475 && primCount == 510) || \
-(numVertices == 343 && primCount == 344))
-
-#define GSG9_DX8 (( numVertices == 3380 && primCount == 3300 ) || \
-( numVertices == 3380 && primCount == 766 ) || \
-( numVertices == 3380 && primCount == 357 ) || \
-( numVertices == 3380 && primCount == 432 ) || \
-( numVertices == 3380 && primCount == 17 ) || \
-( numVertices == 2260 && primCount == 1376 ) || \
-( numVertices == 2260 && primCount == 1263 ) || \
-( numVertices == 2260 && primCount == 360 ) || \
-( numVertices == 2260 && primCount == 5 ) || \
-( numVertices == 1487 && primCount == 1083 ) || \
-( numVertices == 1487 && primCount == 658 ) || \
-( numVertices == 1487 && primCount == 117 ) || \
-( numVertices == 814 && primCount == 945 ) || \
-( numVertices == 475 && primCount == 510 ) || \
-( numVertices == 2260 && primCount == 5 ) || \
-( numVertices == 343 && primCount == 344 ))
-
-#define SEAL ((numVertices == 2487 && primCount == 3006) || \
-(numVertices == 1609 && primCount == 1794) || \
-(numVertices == 3887 && primCount == 4974) || \
-(numVertices == 899 && primCount == 910) || \
-(numVertices == 513 && primCount == 451) || \
-(numVertices == 369 && primCount == 297))
-
-#define SEAL_DX8 (( numVertices == 3973 && primCount == 3443 ) || \
-( numVertices == 3973 && primCount == 701 ) || \
-( numVertices == 3973 && primCount == 607 ) || \
-( numVertices == 3973 && primCount == 223 ) || \
-( numVertices == 2587 && primCount == 2075 ) || \
-( numVertices == 2587 && primCount == 622 ) || \
-( numVertices == 2587 && primCount == 309 ) || \
-( numVertices == 513 && primCount == 451 ) || \
-( numVertices == 369 && primCount == 297 ) || \
-( numVertices == 1677 && primCount == 1264 ) || \
-( numVertices == 1677 && primCount == 487 ) || \
-( numVertices == 1677 && primCount == 43 ) || \
-( numVertices == 899 && primCount == 910 ))
-
-#define PHOENIX ((numVertices == 2274 && primCount == 3070) || \
-(numVertices == 3265 && primCount == 5015) || \
-(numVertices == 1510 && primCount == 1871) || \
-(numVertices == 873 && primCount == 986) || \
-(numVertices == 563 && primCount == 590) || \
-(numVertices == 368 && primCount == 377))
-
-#define PHOENIX_DX8 (( numVertices == 3349 && primCount == 3596 ) || \
-( numVertices == 3349 && primCount == 725 ) || \
-( numVertices == 3349 && primCount == 625 ) || \
-( numVertices == 3349 && primCount == 69 ) || \
-( numVertices == 873 && primCount == 986 ) || \
-( numVertices == 1584 && primCount == 1211 ) || \
-( numVertices == 1584 && primCount == 420 ) || \
-( numVertices == 1584 && primCount == 240 ) || \
-( numVertices == 2375 && primCount == 2114 ) || \
-( numVertices == 2375 && primCount == 578 ) || \
-( numVertices == 2375 && primCount == 378 ) || \
-( numVertices == 368 && primCount == 377 ) || \
-( numVertices == 563 && primCount == 590 ))
-
-#define ELITE ((numVertices == 1992 && primCount == 2996) || \
-(numVertices == 3087 && primCount == 4911) || \
-(numVertices == 735 && primCount == 899) || \
-(numVertices == 1311 && primCount == 1812) || \
-(numVertices == 454 && primCount == 519) || \
-(numVertices == 323 && primCount == 338))
-
-#define ELITE_DX8 (( numVertices == 3248 && primCount == 1758 ) || \
-( numVertices == 3248 && primCount == 2340 ) || \
-( numVertices == 3248 && primCount == 611 ) || \
-( numVertices == 3248 && primCount == 154 ) || \
-( numVertices == 3248 && primCount == 48 ) || \
-( numVertices == 2119 && primCount == 1607 ) || \
-( numVertices == 2119 && primCount == 779 ) || \
-( numVertices == 2119 && primCount == 599 ) || \
-( numVertices == 2119 && primCount == 11 ) || \
-( numVertices == 1375 && primCount == 1189 ) || \
-( numVertices == 1375 && primCount == 460 ) || \
-( numVertices == 1375 && primCount == 163 ) || \
-( numVertices == 735 && primCount == 899 ) || \
-( numVertices == 454 && primCount == 519 ) || \
-( numVertices == 323 && primCount == 338 ))
-
-#define ARCTIC ((numVertices == 1488 && primCount == 1819) || \
-(numVertices == 2292 && primCount == 3015) || \
-(numVertices == 3210 && primCount == 4503) || \
-(numVertices == 408 && primCount == 344) || \
-(numVertices == 835 && primCount == 899) || \
-(numVertices == 554 && primCount == 509))
-
-#define ARCTIC_DX8 (( numVertices == 3319 && primCount == 2871 ) || \
-( numVertices == 3319 && primCount == 773 ) || \
-( numVertices == 3319 && primCount == 663 ) || \
-( numVertices == 3319 && primCount == 196 ) || \
-( numVertices == 2412 && primCount == 1614 ) || \
-( numVertices == 2412 && primCount == 891 ) || \
-( numVertices == 2412 && primCount == 490 ) || \
-( numVertices == 2412 && primCount == 20 ) || \
-( numVertices == 1564 && primCount == 1194 ) || \
-( numVertices == 1564 && primCount == 381 ) || \
-( numVertices == 1564 && primCount == 244 ) || \
-( numVertices == 835 && primCount == 899 ) || \
-( numVertices == 554 && primCount == 509 ) || \
-( numVertices == 408 && primCount == 344 ))
-
-#define GUERILLA ((numVertices == 1588 && primCount == 2013) || \
-(numVertices == 2261 && primCount == 3003) || \
-(numVertices == 3561 && primCount == 5066) || \
-(numVertices == 911 && primCount == 996) || \
-(numVertices == 526 && primCount == 594) || \
-(numVertices == 389 && primCount == 386))
-
-#define GUERILLA_DX8 (( numVertices == 3676 && primCount == 3184 ) || \
-( numVertices == 2373 && primCount == 1794 ) || \
-( numVertices == 1699 && primCount == 1312 ) || \
-( numVertices == 911 && primCount == 996 ) || \
-( numVertices == 526 && primCount == 594 ) || \
-( numVertices == 389 && primCount == 386 ))
+#define SEAL ((numVertices == 3887) && (primCount == 4974))
+#define GSG ((numVertices == 3206) && (primCount == 4872))
+#define SAS ((numVertices == 3417) && (primCount == 5030))
+#define GIGN ((numVertices == 3304) && (primCount == 5003))
 #endif // _CSS
 
 #ifdef _CSGO
@@ -483,7 +311,6 @@ bool GetD3D9Device(void** pTable, size_t size)
 	if (!g_pd3dDevice)
 	{
 		d3dPP.Windowed = !d3dPP.Windowed;
-
 		g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3dPP.hDeviceWindow, D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dPP, &g_pd3dDevice);
 
 		if (!g_pd3dDevice)
@@ -615,7 +442,7 @@ HRESULT APIENTRY DrawIndexedPrimitive_Hook(IDirect3DDevice9* pDevice, D3DPRIMITI
 	if (Chams)
 	{
 #ifdef _CSS
-		if (TE || CTE)
+		if (TR || CT)
 		{
 			pDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
 			pDevice->SetPixelShader(shaderBack);
